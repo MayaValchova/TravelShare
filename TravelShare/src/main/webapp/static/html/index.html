@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Kozi Media</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous">
+	</script>
+<script type="text/javascript">
+function refreshUsername() {
+	$("#people").empty();
+	var username = $("#username").val();
+	$.get("http://localhost:8080/SuperDemo/MediaService?user=" + username,
+			function(data) {
+	
+	for ( var index in data ) {
+		var user = data[index];
+		var img = document.createElement("img");
+		console.log(user.imgName)
+		img.src = user.imgName;
+		img.style = "float:left,padding-right:10px";
+		img.width = 100;
+		img.height = 100;
+		$("#people").append(img);
+		var name = document.createElement("p");
+		name.innerHTML = user.name;
+		name.style = "padding:5px"
+		$("#people").append(name);
+		
+		var age = document.createElement("p");
+		age.innerHTML = user.age;
+		age.style = "padding:5px"
+		$("#people").append(age);
+		
+		var city = document.createElement("p");
+		city.innerHTML = user.city;
+		city.style = "padding:5px"
+		$("#people").append(city);
+		
+		var btn = document.createElement("BUTTON");
+		btn.width = 100;
+		btn.height = 100;
+		btn.name = "choose";
+		$("#people").append(btn);
+		
+		var novRed = document.createElement("p");
+		$("#people").append(novRed);
+		
+		
+		
+	}
+
+	});
+}
+</script>
+</head>
+<body>
+
+	<label> Enter username: </label>
+	<input type="text" id="username" onkeyup="refreshUsername()" />
+	<div id="people"></div>
+
+</body>
+</html>
